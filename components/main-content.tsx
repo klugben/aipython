@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Calendar, Clock, ArrowRight, Star } from "lucide-react"
 import { Post } from "@/lib/posts"
+import Link from "next/link"
 
 interface MainContentProps {
   posts: Post[]
@@ -35,9 +36,9 @@ export function MainContent({ posts }: MainContentProps) {
       {/* 头部介绍 */}
       <section className="mb-12">
         <div className="max-w-4xl">
-          <h1 className="text-4xl font-bold text-foreground mb-4 text-balance">欢迎来到 AI Python 技术博客</h1>
+          <h1 className="text-4xl font-bold text-foreground mb-4 text-balance">AI Python 技术博客</h1>
           <p className="text-lg text-muted-foreground leading-relaxed text-pretty">
-            这里分享关于人工智能、Python编程、机器学习和数据科学的最新技术和实践经验。 让我们一起探索AI技术的无限可能。
+            分享AI、Python和数据科学的技术实践，一起探索人工智能的无限可能。
           </p>
         </div>
       </section>
@@ -53,39 +54,41 @@ export function MainContent({ posts }: MainContentProps) {
 
         <div className="grid gap-6">
           {featuredPosts.map((post) => (
-            <Card key={post.id} className="hover:shadow-md transition-shadow">
-              <CardHeader>
-                <div className="flex items-start justify-between">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-2">
-                      <Badge variant="secondary">{post.category}</Badge>
-                      {post.featured && (
-                        <Badge variant="default" className="bg-accent text-accent-foreground">
-                          <Star className="w-3 h-3 mr-1" />
-                          精选
-                        </Badge>
-                      )}
+            <Link key={post.id} href={`/blog/${post.slug}`}>
+              <Card className="hover:shadow-md transition-shadow cursor-pointer">
+                <CardHeader>
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-2">
+                        <Badge variant="secondary">{post.category}</Badge>
+                        {post.featured && (
+                          <Badge variant="default" className="bg-accent text-accent-foreground">
+                            <Star className="w-3 h-3 mr-1" />
+                            精选
+                          </Badge>
+                        )}
+                      </div>
+                      <CardTitle className="text-xl mb-2 hover:text-accent transition-colors">
+                        {post.title}
+                      </CardTitle>
                     </div>
-                    <CardTitle className="text-xl mb-2 hover:text-accent cursor-pointer transition-colors">
-                      {post.title}
-                    </CardTitle>
                   </div>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-4 leading-relaxed">{post.excerpt}</p>
-                <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                  <div className="flex items-center gap-1">
-                    <Calendar className="w-4 h-4" />
-                    {post.date}
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground mb-4 leading-relaxed">{post.excerpt}</p>
+                  <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                    <div className="flex items-center gap-1">
+                      <Calendar className="w-4 h-4" />
+                      {post.date}
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Clock className="w-4 h-4" />
+                      {post.readTime}
+                    </div>
                   </div>
-                  <div className="flex items-center gap-1">
-                    <Clock className="w-4 h-4" />
-                    {post.readTime}
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            </Link>
           ))}
         </div>
       </section>
@@ -121,16 +124,10 @@ export function MainContent({ posts }: MainContentProps) {
             <CardTitle className="text-2xl">关于我</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="prose prose-gray max-w-none">
-              <p className="text-muted-foreground leading-relaxed mb-4">
-                我是一名专注于AI和Python开发的技术博主，拥有多年的机器学习和数据科学实践经验。
-                热衷于分享技术知识，帮助更多人了解和掌握人工智能技术。
-              </p>
-              <p className="text-muted-foreground leading-relaxed">
-                在这个博客中，我会分享我在AI开发过程中的经验、遇到的问题以及解决方案，
-                希望能够为同样热爱技术的朋友们提供一些帮助和启发。
-              </p>
-            </div>
+            <p className="text-muted-foreground leading-relaxed">
+              AI和Python技术爱好者，专注于机器学习和数据科学实践。
+              在这里分享技术经验和解决方案，与技术社区一起成长。
+            </p>
           </CardContent>
         </Card>
       </section>
