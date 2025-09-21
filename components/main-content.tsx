@@ -1,0 +1,139 @@
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Calendar, Clock, ArrowRight, Star } from "lucide-react"
+import { Post } from "@/lib/posts"
+
+interface MainContentProps {
+  posts: Post[]
+}
+
+export function MainContent({ posts }: MainContentProps) {
+  // 使用传入的文章数据
+  const featuredPosts = posts.slice(0, 3) // 取前3篇作为精选
+
+  const recentProjects = [
+    {
+      name: "AI聊天机器人",
+      description: "基于GPT的智能对话系统",
+      tech: ["Python", "OpenAI API", "Streamlit"],
+    },
+    {
+      name: "数据可视化工具",
+      description: "交互式数据分析和可视化平台",
+      tech: ["Python", "Plotly", "Dash"],
+    },
+    {
+      name: "图像识别API",
+      description: "基于深度学习的图像分类服务",
+      tech: ["PyTorch", "FastAPI", "Docker"],
+    },
+  ]
+
+  return (
+    <main className="flex-1 p-8">
+      {/* 头部介绍 */}
+      <section className="mb-12">
+        <div className="max-w-4xl">
+          <h1 className="text-4xl font-bold text-foreground mb-4 text-balance">欢迎来到 AI Python 技术博客</h1>
+          <p className="text-lg text-muted-foreground leading-relaxed text-pretty">
+            这里分享关于人工智能、Python编程、机器学习和数据科学的最新技术和实践经验。 让我们一起探索AI技术的无限可能。
+          </p>
+        </div>
+      </section>
+
+      {/* 精选文章 */}
+      <section className="mb-12">
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-2xl font-bold text-foreground">精选文章</h2>
+          <Button variant="outline" className="text-sm bg-transparent">
+            查看全部 <ArrowRight className="ml-2 h-4 w-4" />
+          </Button>
+        </div>
+
+        <div className="grid gap-6">
+          {featuredPosts.map((post) => (
+            <Card key={post.id} className="hover:shadow-md transition-shadow">
+              <CardHeader>
+                <div className="flex items-start justify-between">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Badge variant="secondary">{post.category}</Badge>
+                      {post.featured && (
+                        <Badge variant="default" className="bg-accent text-accent-foreground">
+                          <Star className="w-3 h-3 mr-1" />
+                          精选
+                        </Badge>
+                      )}
+                    </div>
+                    <CardTitle className="text-xl mb-2 hover:text-accent cursor-pointer transition-colors">
+                      {post.title}
+                    </CardTitle>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground mb-4 leading-relaxed">{post.excerpt}</p>
+                <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                  <div className="flex items-center gap-1">
+                    <Calendar className="w-4 h-4" />
+                    {post.date}
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <Clock className="w-4 h-4" />
+                    {post.readTime}
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </section>
+
+      {/* 最新项目 */}
+      <section className="mb-12">
+        <h2 className="text-2xl font-bold text-foreground mb-6">最新项目</h2>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {recentProjects.map((project, index) => (
+            <Card key={index} className="hover:shadow-md transition-shadow">
+              <CardHeader>
+                <CardTitle className="text-lg">{project.name}</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground mb-4">{project.description}</p>
+                <div className="flex flex-wrap gap-2">
+                  {project.tech.map((tech) => (
+                    <Badge key={tech} variant="outline" className="text-xs">
+                      {tech}
+                    </Badge>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </section>
+
+      {/* 关于我 */}
+      <section id="about" className="mb-12">
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-2xl">关于我</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="prose prose-gray max-w-none">
+              <p className="text-muted-foreground leading-relaxed mb-4">
+                我是一名专注于AI和Python开发的技术博主，拥有多年的机器学习和数据科学实践经验。
+                热衷于分享技术知识，帮助更多人了解和掌握人工智能技术。
+              </p>
+              <p className="text-muted-foreground leading-relaxed">
+                在这个博客中，我会分享我在AI开发过程中的经验、遇到的问题以及解决方案，
+                希望能够为同样热爱技术的朋友们提供一些帮助和启发。
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+      </section>
+    </main>
+  )
+}
