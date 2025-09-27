@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Calendar, Clock, ArrowRight, Star } from "lucide-react"
 import { Post } from "@/lib/posts"
 import Link from "next/link"
+import { Footer } from "@/components/footer"
 
 interface MainContentProps {
   posts: Post[]
@@ -125,12 +126,14 @@ export function MainContent({ posts }: MainContentProps) {
           </CardHeader>
           <CardContent>
             <p className="text-muted-foreground leading-relaxed">
-              AI和Python技术爱好者，专注于机器学习和数据科学实践。
+              AI和Python技术爱好者，专注于编程探索和学习。
               在这里分享技术经验和解决方案，与技术社区一起成长。
             </p>
           </CardContent>
         </Card>
       </section>
+
+      <Footer />
     </main>
   )
 }

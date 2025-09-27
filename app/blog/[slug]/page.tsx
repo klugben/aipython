@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Calendar, Clock, ArrowLeft } from "lucide-react"
 import Link from "next/link"
+import { Footer } from "@/components/footer"
 
 interface BlogPostPageProps {
   params: { slug: string }
@@ -110,6 +111,8 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
           </CardContent>
         </Card>
       </div>
+
+      <Footer />
     </div>
   )
 }

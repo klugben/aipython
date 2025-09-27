@@ -84,7 +84,7 @@ export function Sidebar() {
       <Card className="p-4">
         <h3 className="text-sm font-semibold mb-3">联系方式</h3>
         <div className="space-y-2 text-sm text-muted-foreground">
-          <p>📧 contact@aipython.cc</p>
+          <p>📧 ben.z@aipython.cc</p>
           <p>🌐 aipython.cc</p>
         </div>
 
